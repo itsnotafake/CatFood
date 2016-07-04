@@ -11,7 +11,43 @@
     tools:context="com.devin.catfood.MainActivity">
 
     <TextView
-        android:text="Hello World!"
+        android:text="Archer&apos;s Food Diary"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textClock"
+        android:format12Hour="MM/dd/yyyy"
+        android:layout_alignParentEnd="true"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fed for Breakfast"
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/textClock"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="53dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:enabled="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fed for Dinner"
+        android:id="@+id/checkBox2"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/checkBox"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:enabled="true" />
+
 </RelativeLayout>
