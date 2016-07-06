@@ -16,7 +16,6 @@ public class ServerRequest {
     public static final String SERVER_URL = "http://somewhere.com/";
 
     public static void feedTheCat(RequestQueue queue, Response.Listener responseListener, String user, String meal) {
-        String v = "20160501";
         String url = String.format("%s/feedTheCat?user=%s&meal=%s", SERVER_URL, user, meal);
         Log.w(MainActivity.TAG, "sending feedTheCat request: " + url);
 
