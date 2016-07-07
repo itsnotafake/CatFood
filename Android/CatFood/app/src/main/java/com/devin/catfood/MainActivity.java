@@ -19,11 +19,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // for using Volley
+        VolleySingleton volley = VolleySingleton.getInstance(this);
+        final RequestQueue queue = volley.getRequestQueue();
+
         final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
         checkBox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 checkBox.setEnabled(false);
                 Log.w(TAG, "checkBox pressed");
+                ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "breakfast");
             }
         });
 
@@ -32,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 checkBox2.setEnabled(false);
                 Log.w(TAG, "checkBox2 pressed");
+                ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "dinner");
             }
         });
 
-        // for using Volley
-        VolleySingleton volley = VolleySingleton.getInstance(this);
-        RequestQueue queue = volley.getRequestQueue();
-
         // test sending a server request
-        ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "breakfast");
+        //ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "breakfast");
     }
 
     private Response.Listener<String> mFeedTheCatResponseListener = new Response.Listener<String>() {
