@@ -1,0 +1,10 @@
+request: feedTheCat?user=string&meal=string
+reply:
+unknown_user
+unknown_meal
+already_fed
+ok
+
+request: mealCheck
+reply:
+booleanString booleanString
