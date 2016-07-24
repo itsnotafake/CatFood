@@ -12,8 +12,8 @@ import com.android.volley.toolbox.StringRequest;
  * Created by Devin on 7/4/2016.
  */
 public class ServerRequest {
-    // server potentially running at http://192.168.1.105:8124/
-    public static final String SERVER_URL = "http://192.168.1.105:8124";
+    // server potentially running at http://192.168.1.106:8124/
+    public static final String SERVER_URL = "http://192.168.1.106:8124";
 
     public static void feedTheCat(RequestQueue queue, Response.Listener responseListener, String user, String meal) {
         String url = String.format("%s/feedTheCat?user=%s&meal=%s", SERVER_URL, user, meal);

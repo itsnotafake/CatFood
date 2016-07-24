@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static String TAG = "dg";
     public static int MEALCHECK_CYCLE = 20;
-    public boolean breakfastEnabled = true;
-    public boolean dinnerEnabled = true;
+    private CheckBox breakfastBox;
+    private CheckBox dinnerBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,22 +33,20 @@ public class MainActivity extends AppCompatActivity {
         //on application startup we run mealCheck to update our booleans
         ServerRequest.mealCheck(queue, mMealCheckListener);
 
-        final CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
-        checkBox.setEnabled(breakfastEnabled);
-        checkBox.setOnClickListener(new View.OnClickListener() {
+        breakfastBox = (CheckBox) findViewById(R.id.breakfastBox);
+        breakfastBox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                checkBox.setEnabled(false);
-                Log.w(TAG, "checkBox pressed");
+                breakfastBox.setEnabled(false);
+                Log.w(TAG, "breakfastBox pressed");
                 ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "breakfast");
             }
         });
 
-        final CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
-        checkBox2.setEnabled(dinnerEnabled);
-        checkBox2.setOnClickListener(new View.OnClickListener() {
+        dinnerBox = (CheckBox) findViewById(R.id.dinnerBox);
+        dinnerBox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                checkBox2.setEnabled(false);
-                Log.w(TAG, "checkBox2 pressed");
+                dinnerBox.setEnabled(false);
+                Log.w(TAG, "dinnerBox pressed");
                 ServerRequest.feedTheCat(queue, mFeedTheCatResponseListener, "devin", "dinner");
             }
         });
@@ -73,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
             Log.w(TAG, "FeedTheCatResponse is: " + response);
+            //unknown_user, unknown_meal, already_fed, ok, broken_request
+            if(response.equals("ok")){
+                Log.w(TAG,"FeedTheCatResponse: " + response);
+            }else{
+                Log.e(TAG,"FeedTheCatResponse: " + response);
+            }
         }
     };
 
@@ -80,6 +84,27 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
             Log.w(TAG, "MealCheckResponse is: " + response);
+            String[] booleanResponse = response.split(" ");
+            boolean breakfastEnabled = Boolean.getBoolean(booleanResponse[0]);
+            boolean dinnerEnabled = Boolean.getBoolean(booleanResponse[1]);
+            Log.w(TAG, "<" + dinnerEnabled + ">");
+
+
+            if(breakfastEnabled){
+                breakfastBox.setEnabled(true);
+                breakfastBox.setChecked(false);
+            }else{
+                breakfastBox.setEnabled(false);
+                breakfastBox.setChecked(true);
+            }
+
+            if(dinnerEnabled){
+                dinnerBox.setEnabled(true);
+                dinnerBox.setChecked(false);
+            }else {
+                dinnerBox.setEnabled(false);
+                dinnerBox.setChecked(true);
+            }
         }
     };
 }

@@ -4,6 +4,7 @@ unknown_user
 unknown_meal
 already_fed
 ok
+broken_request
 
 request: mealCheck
 reply:

@@ -34,14 +34,6 @@ var requestHandler = function (req, res) {
   	res.end(reply + '\n');
 }
 
-var server = http.createServer(requestHandler);
-console.log("Server created");
-
-server.listen(8124, "192.168.1.105");
-console.log("Server is listening");
-
-console.log('Server running at on my PC at 192.168.1.105');
-
 var feedTheCat = function (requestURL){
 	var myArgs = querystring.parse(require('url').parse(requestURL).query);
 	console.log(myArgs);
@@ -100,3 +92,11 @@ var mealCheck = function(){
 	} 
 	return breakfastEnabled + " " + dinnerEnabled; 
 }
+
+var server = http.createServer(requestHandler);
+console.log("Server created");
+
+server.listen(8124, "192.168.1.106");
+console.log("Server is listening");
+
+console.log('Server running at on my PC at 192.168.1.106');
