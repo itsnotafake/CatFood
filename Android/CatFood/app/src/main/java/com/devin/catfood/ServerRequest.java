@@ -44,4 +44,19 @@ public class ServerRequest {
                 });
         queue.add(stringRequest);
     }
+
+    public static void clear(RequestQueue queue, Response.Listener responseListener){
+        String url = String.format("%s/clear", SERVER_URL);
+        Log.w(MainActivity.TAG, "sending clear request: " + url);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                responseListener,
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Log.e(MainActivity.TAG, "onErrorResponse: " + error.getMessage());
+                    }
+                });
+        queue.add(stringRequest);
+    }
 }

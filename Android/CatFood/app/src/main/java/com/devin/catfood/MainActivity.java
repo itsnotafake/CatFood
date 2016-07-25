@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static String TAG = "dg";
+    public static String TAG = "Devin";
     public static int MEALCHECK_CYCLE = 20;
     private CheckBox breakfastBox;
     private CheckBox dinnerBox;
@@ -85,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
         public void onResponse(String response) {
             Log.w(TAG, "MealCheckResponse is: " + response);
             String[] booleanResponse = response.split(" ");
-            boolean breakfastEnabled = Boolean.getBoolean(booleanResponse[0]);
-            boolean dinnerEnabled = Boolean.getBoolean(booleanResponse[1]);
-            Log.w(TAG, "<" + dinnerEnabled + ">");
+            boolean breakfastEnabled = Boolean.parseBoolean(removeWhiteSpace(booleanResponse[0]));
+            Log.w(TAG,"BooleanResponse[0] = <" + booleanResponse[0] + ">");
+            Log.w(TAG,"BooleanResponse[1] = <" + booleanResponse[1] + ">");
+            boolean dinnerEnabled = Boolean.parseBoolean(removeWhiteSpace(booleanResponse[1]));
 
 
             if(breakfastEnabled){
@@ -107,4 +108,17 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private Response.Listener<String> mClearListener = new Response.Listener<String>(){
+        @Override
+        public void onResponse(String response){
+            Log.w(TAG, "Clear response is: " + response);
+        }
+    };
+
+    private String removeWhiteSpace (String s){
+        return s.replaceAll("\\s+","");
+    }
 }
+
+

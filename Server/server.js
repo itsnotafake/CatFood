@@ -26,6 +26,8 @@ var requestHandler = function (req, res) {
 		reply = feedTheCat(reqURL);
 	}else if(calledMethod == "mealCheck"){
 		reply = mealCheck();
+	}else if(calledMethod == "clear"){
+		reply = clear();
 	}else{
 		reply = "unknown_request";
 	}
@@ -91,6 +93,12 @@ var mealCheck = function(){
 		dinnerEnabled = true;
 	} 
 	return breakfastEnabled + " " + dinnerEnabled; 
+}
+
+var clear = function(){
+	breakfastEnabled = true;
+	dinnerEnabled = true;
+	return "cleared";
 }
 
 var server = http.createServer(requestHandler);

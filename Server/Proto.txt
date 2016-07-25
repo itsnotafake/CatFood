@@ -9,3 +9,7 @@ broken_request
 request: mealCheck
 reply:
 booleanString booleanString
+
+request: clear
+reply:
+cleared
